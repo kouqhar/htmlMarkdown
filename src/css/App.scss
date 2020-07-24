@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@600&display=swap');
+
+$greyD : #fff;
+$bg : rgb(44, 62, 80);
+
+@mixin hW($height : 100%, $width : 100%) {
+    height: $height;
+    width: $width;
+}
+
+@mixin displayFlex($jc, $ai) {
+    display: flex;
+    justify-content: $jc;
+    align-items: $ai;
+}
+
+@mixin border {
+    border: .3rem solid rgb(27, 54, 51);
+    border-radius: .8rem;
+    padding: 1rem;
+    background: $greyD;
+}
+
+body{
+    @include hW(100vh);
+    scroll-behavior: smooth;
+    font-family: "Source Code Pro";
+    overflow-x: hidden;
+    background: $bg;
+    padding: 0;
+    margin: 0;
+}
+
+.page-wrapper{
+    @include hW(100vh);
+    @include displayFlex(space-evenly, center);
+    h6{
+        @include hW(auto, 80%);
+        margin: 0 auto .5rem;
+        background: rgb(27, 54, 51);
+        color: white;
+        text-align: center;
+        font-size: 1rem;
+        padding: .5rem 2rem;
+    }
+    .markdown{
+        position: relative;
+        @include displayFlex(flex-start, flex-start);
+        flex-direction: column;
+        @include hW(90%);
+        @include border();
+        textarea{
+            @include hW(100%, 95%);
+            margin: 0;
+            padding: 1rem;
+            border: none;
+            &:focus{
+                border: none;
+            }
+        }
+    }
+    .preview{
+        position: relative;
+        @include displayFlex(flex-start, flex-start);
+        flex-direction: column;
+        @include hW(90%);
+        @include border();
+        // padding: 1em ;
+        #preview{
+            overflow-y: scroll;
+            padding: 0 1rem;
+        }
+        img{
+            @include hW(20%, 50%);
+            border-radius: 1em;
+        }
+        code{
+            background: rgb(236, 236, 236);
+            color: rgb(143, 12, 12);
+            font-weight: bold;
+            font-size: .8rem;
+            line-height: 1.5rem;
+            padding: .2em 2em;
+            border-radius: .2em;
+        }
+    }
+}
+
+@media screen and (max-width : 900px){
+    .page-wrapper{
+        @include hW(100%, 90%);
+        margin: 0 auto;
+        @include displayFlex(space-between, center);
+        flex-direction: column;
+        font-size: 1rem;
+        h6{
+            font-size: 1.5rem;
+            padding: 1rem 2rem;
+        }
+        .markdown{
+            @include displayFlex(flex-start, center);
+            @include hW(60vh);
+            textarea{
+                @include hW(100%, 90%);
+                margin: 0 auto;
+            }
+        }
+        .preview{
+            @include displayFlex(flex-start, center);
+            @include hW(90vh);
+            padding: 1em ;
+            #preview{
+                overflow-y: scroll;
+                padding: 0 1rem;
+            }
+        }
+    }
+}
